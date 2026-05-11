@@ -13,7 +13,7 @@ kubectl patch deployment metrics-server -n kube-system --type='json' \
 
 kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
 
-# Apply the standard HPA (autoscaling/v2 — built-in K8s)
+# Apply the standard HPA (autoscaling/v2: built-in K8s)
 kubectl apply -f manifests/namespace.yaml
 kubectl apply -f manifests/catalog-hpa.yaml
 

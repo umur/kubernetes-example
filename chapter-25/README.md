@@ -1,12 +1,12 @@
-# chapter-25 — Observability boundary: Micrometer, OTel, and what belongs in this book
+# chapter-25: Observability boundary: Micrometer, OTel, and what belongs in this book
 
 Companion snapshot for Chapter 25 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

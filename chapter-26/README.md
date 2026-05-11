@@ -1,12 +1,12 @@
-# chapter-26 — Cost: showback, chargeback, and FinOps signals
+# chapter-26: Cost: showback, chargeback, and FinOps signals
 
 Companion snapshot for Chapter 26 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

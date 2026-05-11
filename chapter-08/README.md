@@ -1,12 +1,12 @@
-# chapter-08 — Persistent storage: CSI, StorageClasses, and StatefulSets
+# chapter-08: Persistent storage: CSI, StorageClasses, and StatefulSets
 
 Companion snapshot for Chapter 08 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

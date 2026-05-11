@@ -1,12 +1,12 @@
-# chapter-18 — Kyverno: policy as code
+# chapter-18: Kyverno: policy as code
 
 Companion snapshot for Chapter 18 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

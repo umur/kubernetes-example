@@ -1,12 +1,12 @@
-# chapter-12 — Cluster Autoscaler vs Karpenter for node provisioning
+# chapter-12: Cluster Autoscaler vs Karpenter for node provisioning
 
 Companion snapshot for Chapter 12 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

@@ -1,12 +1,12 @@
-# chapter-09 — RBAC, service accounts, and workload identity
+# chapter-09: RBAC, service accounts, and workload identity
 
 Companion snapshot for Chapter 09 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

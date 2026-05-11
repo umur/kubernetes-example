@@ -24,7 +24,7 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 0    # never go below desired — surge only
+      maxUnavailable: 0    # never go below desired: surge only
       maxSurge: 1
   selector:
     matchLabels:

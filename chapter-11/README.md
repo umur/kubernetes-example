@@ -1,12 +1,12 @@
-# chapter-11 — HPA, VPA, and KEDA — autoscaling that actually works
+# chapter-11: HPA, VPA, and KEDA: autoscaling that actually works
 
 Companion snapshot for Chapter 11 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

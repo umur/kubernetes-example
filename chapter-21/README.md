@@ -1,12 +1,12 @@
-# chapter-21 — Argo Rollouts: progressive delivery patterns
+# chapter-21: Argo Rollouts: progressive delivery patterns
 
 Companion snapshot for Chapter 21 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

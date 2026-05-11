@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-echo "NOTE: Karpenter requires a real EKS cluster — cannot run in kind."
+echo "NOTE: Karpenter requires a real EKS cluster: cannot run in kind."
 echo "Apply manifests against your EKS cluster with Karpenter installed:"
 echo "  kubectl apply -f manifests/"
 echo ""

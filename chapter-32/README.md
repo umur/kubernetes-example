@@ -1,12 +1,12 @@
-# chapter-32 — Capstone: Black Friday at 50× normal load
+# chapter-32: Capstone: Black Friday at 50× normal load
 
 Companion snapshot for Chapter 32 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

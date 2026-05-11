@@ -1,12 +1,12 @@
-# chapter-16 — Sealed Secrets and Vault as alternatives
+# chapter-16: Sealed Secrets and Vault as alternatives
 
 Companion snapshot for Chapter 16 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

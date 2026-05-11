@@ -1,12 +1,12 @@
-# chapter-06 — Networking deep dive: CNI, DNS, NetworkPolicies
+# chapter-06: Networking deep dive: CNI, DNS, NetworkPolicies
 
 Companion snapshot for Chapter 06 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

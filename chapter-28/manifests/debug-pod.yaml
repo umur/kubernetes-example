@@ -1,4 +1,4 @@
-# Ephemeral debug container — attach to a running pod without restarting it
+# Ephemeral debug container: attach to a running pod without restarting it
 # Usage: kubectl debug -it <pod-name> -n cinetrack --image=nicolaka/netshoot --target=catalog-service
 apiVersion: v1
 kind: Pod

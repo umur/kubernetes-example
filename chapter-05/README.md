@@ -1,12 +1,12 @@
-# chapter-05 — ConfigMaps, Secrets, and external configuration
+# chapter-05: ConfigMaps, Secrets, and external configuration
 
 Companion snapshot for Chapter 05 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

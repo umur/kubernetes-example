@@ -1,4 +1,4 @@
-# Runbook: OOMKilled — catalog-service
+# Runbook: OOMKilled: catalog-service
 
 ## Symptoms
 - `kubectl describe pod <pod> -n cinetrack` shows `OOMKilled`
@@ -30,7 +30,7 @@ kubectl logs <pod> -n cinetrack | grep "GC overhead"
 ```
 
 ## Permanent fix
-1. Review `JAVA_TOOL_OPTIONS` — ensure `MaxRAMPercentage` ≤ 75
+1. Review `JAVA_TOOL_OPTIONS`: ensure `MaxRAMPercentage` ≤ 75
 2. Check for Caffeine cache unbounded growth (set `maximumSize`)
 3. Consider VPA recommendation: `kubectl get vpa catalog-service -n cinetrack`
 

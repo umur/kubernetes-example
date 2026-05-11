@@ -1,4 +1,4 @@
-# Runbook: High Latency — catalog-service
+# Runbook: High Latency: catalog-service
 
 ## Symptoms
 - p95 latency > 500ms (alert: `CatalogServiceHighLatency`)

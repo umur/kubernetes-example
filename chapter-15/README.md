@@ -1,12 +1,12 @@
-# chapter-15 — External Secrets Operator and the secrets pattern
+# chapter-15: External Secrets Operator and the secrets pattern
 
 Companion snapshot for Chapter 15 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

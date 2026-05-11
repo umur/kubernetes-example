@@ -1,12 +1,12 @@
-# chapter-28 — Operating the platform: runbooks, on-call, and post-incident
+# chapter-28: Operating the platform: runbooks, on-call, and post-incident
 
 Companion snapshot for Chapter 28 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

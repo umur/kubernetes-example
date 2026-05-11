@@ -1,12 +1,12 @@
-# chapter-31 — Multi-cluster and multi-region for real
+# chapter-31: Multi-cluster and multi-region for real
 
 Companion snapshot for Chapter 31 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 

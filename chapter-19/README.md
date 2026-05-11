@@ -1,12 +1,12 @@
-# chapter-19 — GitOps with Argo CD: app-of-apps and ApplicationSets
+# chapter-19: GitOps with Argo CD: app-of-apps and ApplicationSets
 
 Companion snapshot for Chapter 19 of *Cloud-Native Spring Boot*.
 
 ## Layout
 
-- `manifests/` — chapter-specific Kubernetes manifests
-- `scripts/up.sh` — local kind cluster bringup at this chapter's state
-- `scripts/down.sh` — teardown
+- `manifests/`: chapter-specific Kubernetes manifests
+- `scripts/up.sh`: local kind cluster bringup at this chapter's state
+- `scripts/down.sh`: teardown
 
 ## Run
 
