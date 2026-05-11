@@ -2,11 +2,20 @@
 
 > Operating a Spring Boot fleet on production Kubernetes — the parts the docs leave out.
 
+![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-1.31%2B-326CE5?logo=kubernetes&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.0-6DB33F?logo=spring&logoColor=white) ![License: MIT](https://img.shields.io/badge/License%3A_MIT-MIT-blue)
+
 Companion code for the book **Cloud-Native Spring Boot on Kubernetes** by [Umur Inan](https://umurinan.com).
 
 ## About the book
 
 Picks up where *Microservices with Spring Boot 4* ends and operates that system on real Kubernetes. GitOps with Argo CD, Karpenter, CloudNativePG, Strimzi, External Secrets Operator, Linkerd, Argo Rollouts, Kyverno, supply-chain provenance with Sigstore — every component picked, justified, and integrated against the same CinéTrack platform across 32 chapters.
+
+## Prerequisites
+
+- [kind](https://kind.sigs.k8s.io) (Kubernetes IN Docker)
+- kubectl
+- Helm 3
+- Docker
 
 ## Quick start
 
