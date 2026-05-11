@@ -5,10 +5,13 @@ if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
   kind create cluster --name "$CLUSTER"
 fi
 kubectl config use-context "kind-$CLUSTER"
+
 # Install CloudNativePG operator
-kubectl apply --server-side -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/releases/cnpg-1.23.yaml
-kubectl wait --for=condition=available --timeout=120s deployment/cnpg-controller-manager -n cnpg-system
-# Create credentials secret
+kubectl apply --server-side \
+  -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.23/releases/cnpg-1.23.yaml
+kubectl wait --for=condition=available --timeout=120s \
+  deployment/cnpg-controller-manager -n cnpg-system
+
 kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
 kubectl create secret generic cinetrack-postgres-credentials \
   --from-literal=username=cinetrack_user \

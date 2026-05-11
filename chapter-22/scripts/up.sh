@@ -9,7 +9,10 @@ kubectl config use-context "kind-$CLUSTER"
 # Install Kyverno (--server-side avoids annotation size limit on large CRDs)
 kubectl apply --server-side -f \
   https://github.com/kyverno/kyverno/releases/latest/download/install.yaml
-kubectl wait --for=condition=available --timeout=180s deployment/kyverno -n kyverno
+
+# Kyverno 1.12+ splits into multiple controllers
+kubectl wait --for=condition=available --timeout=180s \
+  deployment/kyverno-admission-controller -n kyverno
 
 kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -f manifests/

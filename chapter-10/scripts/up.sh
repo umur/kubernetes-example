@@ -8,11 +8,16 @@ kubectl config use-context "kind-$CLUSTER"
 
 # Install nginx ingress controller
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-kubectl wait --namespace ingress-nginx --for=condition=ready pod \
-  --selector=app.kubernetes.io/component=controller --timeout=90s
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=90s
 
-# Install Gateway API CRDs (needed for HTTPRoute/Gateway resources)
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
+# Install Gateway API CRDs (specific version for reproducibility)
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+# Wait for Gateway API CRDs to be established before applying resources
+kubectl wait --for=condition=Established crd/gateways.gateway.networking.k8s.io --timeout=60s
+kubectl wait --for=condition=Established crd/httproutes.gateway.networking.k8s.io --timeout=60s
 
 kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -f manifests/
