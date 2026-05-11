@@ -1,6 +1,6 @@
 # Cloud-Native Spring Boot on Kubernetes
 
-> Operating a Spring Boot fleet on production Kubernetes — the parts the docs leave out.
+> Operating a Spring Boot fleet on production Kubernetes: the parts the docs leave out.
 
 ![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-1.31%2B-326CE5?logo=kubernetes&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.0-6DB33F?logo=spring&logoColor=white) ![License: MIT](https://img.shields.io/badge/License%3A_MIT-MIT-blue)
 
@@ -8,7 +8,7 @@ Companion code for the book **Cloud-Native Spring Boot on Kubernetes** by [Umur 
 
 ## About the book
 
-Picks up where *Microservices with Spring Boot 4* ends and operates that system on real Kubernetes. GitOps with Argo CD, Karpenter, CloudNativePG, Strimzi, External Secrets Operator, Linkerd, Argo Rollouts, Kyverno, supply-chain provenance with Sigstore — every component picked, justified, and integrated against the same CinéTrack platform across 32 chapters.
+Picks up where *Microservices with Spring Boot 4* ends and operates that system on real Kubernetes. GitOps with Argo CD, Karpenter, CloudNativePG, Strimzi, External Secrets Operator, Linkerd, Argo Rollouts, Kyverno, supply-chain provenance with Sigstore. Every component picked, justified, and integrated against the same CinéTrack platform across 32 chapters.
 
 ## Prerequisites
 
@@ -27,9 +27,9 @@ cd kubernetes-example/chapter-01
 
 ## Layout
 
-- `chapter-01/ … chapter-32/` — cumulative cluster state at the end of each chapter, with `manifests/` and `scripts/up.sh`
-- `cinetrack-deploy/` — GitOps deployment subtree referenced from Chapters 19 (app-of-apps, ApplicationSets) and 31 (multi-cluster ApplicationSets); contains `envs/{dev,stage,prod-eu,prod-us}/` and `charts/`
-- `cinetrack/` — the baseline CinéTrack codebase carried forward from *Microservices with Spring Boot 4*
+- `chapter-01/ … chapter-32/`: cumulative cluster state at the end of each chapter, with `manifests/` and `scripts/up.sh`
+- `cinetrack-deploy/`: GitOps deployment subtree referenced from Chapters 19 (app-of-apps, ApplicationSets) and 31 (multi-cluster ApplicationSets); contains `envs/{dev,stage,prod-eu,prod-us}/` and `charts/`
+- `cinetrack/`: the baseline CinéTrack codebase carried forward from *Microservices with Spring Boot 4*
 
 ## Stack
 
@@ -54,4 +54,4 @@ I'm Umur Inan. I write books about Spring Boot, Java, distributed systems, and t
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
