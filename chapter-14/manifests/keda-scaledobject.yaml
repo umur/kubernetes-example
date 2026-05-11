@@ -1,0 +1,18 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: catalog-kafka-scaler
+  namespace: cinetrack
+spec:
+  scaleTargetRef:
+    name: catalog-service
+  minReplicaCount: 1
+  maxReplicaCount: 12
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka.cinetrack.svc.cluster.local:9092
+        consumerGroup: catalog-service
+        topic: watch-logged
+        lagThreshold: "50"        # scale up when consumer lag exceeds 50
+        offsetResetPolicy: latest

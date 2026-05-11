@@ -1,0 +1,23 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: cinetrack-critical
+value: 1000000
+globalDefault: false
+description: "Critical CinéTrack services (api-gateway, user-service)"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: cinetrack-standard
+value: 100000
+globalDefault: true
+description: "Standard CinéTrack services"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: cinetrack-batch
+value: 10000
+globalDefault: false
+description: "Batch/background CinéTrack jobs"

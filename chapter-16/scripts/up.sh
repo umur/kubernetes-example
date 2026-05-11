@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# Placeholder bring-up script. Replace with the chapter's real cluster
-# bootstrap when the chapter's content is filled in.
-echo "Not yet implemented for this chapter snapshot."
-echo "See README.md for what this chapter is meant to demonstrate."
-exit 1
+CLUSTER="cinetrack-ch16"
+if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
+  kind create cluster --name "$CLUSTER"
+fi
+kubectl config use-context "kind-$CLUSTER"
+# Install VPA (required for VPA resources)
+if ! kubectl get crd verticalpodautoscalers.autoscaling.k8s.io &>/dev/null; then
+  kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/vertical-pod-autoscaler/deploy/vpa-v1-crd-gen.yaml
+fi
+kubectl apply -f manifests/
+echo "✓ Chapter 16: VPA + PDB + PriorityClass applied"

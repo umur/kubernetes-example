@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-sbom-attestation
+spec:
+  validationFailureAction: Audit     # start in audit before enforcing
+  rules:
+    - name: check-sbom
+      match:
+        any:
+          - resources:
+              kinds: [Pod]
+              namespaces: [cinetrack]
+      verifyImages:
+        - imageReferences:
+            - "ghcr.io/umur/cinetrack-*"
+          attestations:
+            - predicateType: https://spdx.dev/Document
+              attestors:
+                - entries:
+                    - keyless:
+                        subject: "https://github.com/umur/kubernetes-example/.github/workflows/release.yml@refs/heads/main"
+                        issuer: "https://token.actions.githubusercontent.com"

@@ -1,0 +1,30 @@
+# Values override for user-service in dev
+replicaCount: 1
+
+image:
+  tag: latest   # CI/CD pipeline replaces this with the commit SHA
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 0
+
+env:
+  JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=75.0 -XX:+UseContainerSupport"
+  SPRING_PROFILES_ACTIVE: "k8s,dev"
+
+extraEnvFrom:
+  - secretRef:
+      name: user-service-credentials   # injected by ESO or pre-created Secret

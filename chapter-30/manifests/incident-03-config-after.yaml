@@ -1,0 +1,14 @@
+# FIXED: DB URL from Service DNS; credentials from Secret via env var injection
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-service-config
+  namespace: cinetrack
+  annotations:
+    incident: "03-config-drift"
+    state: "after-fix"
+data:
+  application-k8s.properties: |
+    spring.datasource.url=jdbc:postgresql://cinetrack-postgres-rw.cinetrack.svc.cluster.local:5432/cinetrack
+    spring.datasource.username=${DB_USERNAME}
+    spring.datasource.password=${DB_PASSWORD}

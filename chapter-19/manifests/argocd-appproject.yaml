@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cinetrack
+  namespace: argocd
+spec:
+  description: CinéTrack production application
+  sourceRepos:
+    - https://github.com/umur/kubernetes-example
+  destinations:
+    - namespace: cinetrack
+      server: https://kubernetes.default.svc
+    - namespace: cinetrack-staging
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: apps
+      kind: Deployment
+    - group: ""
+      kind: Service
+    - group: ""
+      kind: ConfigMap
+    - group: autoscaling
+      kind: HorizontalPodAutoscaler
+    - group: policy
+      kind: PodDisruptionBudget
+  roles:
+    - name: deployer
+      policies:
+        - p, proj:cinetrack:deployer, applications, sync, cinetrack/*, allow

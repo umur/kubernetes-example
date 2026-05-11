@@ -1,0 +1,24 @@
+# BROKEN: HPA with no scale-down stabilization → thrashes between 2 and 8 replicas
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: catalog-service
+  namespace: cinetrack
+  annotations:
+    incident: "05-hpa-thrash"
+    state: "before-fix"
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: catalog-service
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+  # No behavior block → default 5-min stabilization window but scale-down is instant

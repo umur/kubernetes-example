@@ -1,0 +1,14 @@
+# BROKEN: catalog-service calls review-service synchronously with no timeout
+# When review-service is slow, catalog threads pile up → catalog OOM
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-service-config
+  namespace: cinetrack
+  annotations:
+    incident: "02-cascade"
+    state: "before-fix"
+data:
+  application-k8s.properties: |
+    # No resilience4j config → unbounded blocking calls to review-service
+    spring.application.name=catalog-service

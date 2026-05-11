@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cinetrack-multi-cluster
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            cinetrack/region: "true"
+        values:
+          revision: main
+  template:
+    metadata:
+      name: "cinetrack-{{name}}"
+    spec:
+      project: cinetrack
+      source:
+        repoURL: https://github.com/umur/kubernetes-example
+        targetRevision: "{{values.revision}}"
+        path: "cinetrack-deploy/envs/{{metadata.labels.env}}/apps"
+      destination:
+        server: "{{server}}"
+        namespace: cinetrack
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

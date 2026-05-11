@@ -1,6 +1,3 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# Placeholder teardown.
-echo "Not yet implemented for this chapter snapshot."
-exit 1
+kind delete cluster --name "cinetrack-ch04" 2>/dev/null || echo "cluster not found"

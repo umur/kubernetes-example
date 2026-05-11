@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# Placeholder bring-up script. Replace with the chapter's real cluster
-# bootstrap when the chapter's content is filled in.
-echo "Not yet implemented for this chapter snapshot."
-echo "See README.md for what this chapter is meant to demonstrate."
-exit 1
+CLUSTER="cinetrack-ch24"
+if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
+  kind create cluster --name "$CLUSTER"
+fi
+kubectl config use-context "kind-$CLUSTER"
+# Install CloudNativePG operator
+kubectl apply --server-side -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/releases/cnpg-1.23.yaml
+kubectl wait --for=condition=available --timeout=120s deployment/cnpg-controller-manager -n cnpg-system
+# Create credentials secret
+kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
+kubectl create secret generic cinetrack-postgres-credentials \
+  --from-literal=username=cinetrack_user \
+  --from-literal=password=changeme_in_prod \
+  --namespace=cinetrack --dry-run=client -o yaml | kubectl apply -f -
+kubectl apply -f manifests/
+echo "✓ Chapter 24: CloudNativePG cluster applied"
+echo "Watch: kubectl get cluster cinetrack-postgres -n cinetrack --watch"

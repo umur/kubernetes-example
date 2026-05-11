@@ -1,0 +1,43 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cinetrack-slos
+  namespace: cinetrack
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: cinetrack.slos
+      interval: 30s
+      rules:
+        - alert: CatalogServiceHighLatency
+          expr: |
+            histogram_quantile(0.95,
+              sum by (le, service) (
+                rate(http_server_requests_seconds_bucket{
+                  job="catalog-service"
+                }[5m])
+              )
+            ) > 0.5
+          for: 5m
+          labels:
+            severity: warning
+            team: backend
+          annotations:
+            summary: "Catalog service p95 latency > 500ms"
+            runbook_url: "https://github.com/umur/kubernetes-example/blob/main/chapter-29/manifests/runbook-high-latency.md"
+        - alert: CatalogServiceErrorRate
+          expr: |
+            sum(rate(http_server_requests_seconds_count{
+              job="catalog-service", status=~"5.."
+            }[5m]))
+            /
+            sum(rate(http_server_requests_seconds_count{
+              job="catalog-service"
+            }[5m])) > 0.01
+          for: 2m
+          labels:
+            severity: critical
+            team: backend
+          annotations:
+            summary: "Catalog service error rate > 1%"

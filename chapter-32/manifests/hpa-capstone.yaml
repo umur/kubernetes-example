@@ -1,0 +1,43 @@
+# Tuned HPA from capacity planning (Chapter 17) + incident learnings (Chapter 30)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: catalog-service-capstone
+  namespace: cinetrack
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: catalog-service
+  minReplicas: 3       # baseline from Chapter 17 sizing
+  maxReplicas: 30      # 50× headroom
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 55    # lower threshold = more headroom before saturation
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: 400Mi
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 15   # react fast to traffic burst
+      policies:
+        - type: Percent
+          value: 100                   # double replica count every 30s if needed
+          periodSeconds: 30
+        - type: Pods
+          value: 4
+          periodSeconds: 30
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 120

@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-capstone-test
+  namespace: cinetrack
+data:
+  capstone.js: |
+    import http from 'k6/http';
+    import { check, sleep, group } from 'k6';
+    import { Rate, Trend } from 'k6/metrics';
+
+    const errorRate = new Rate('errors');
+    const catalogLatency = new Trend('catalog_latency');
+
+    export const options = {
+      scenarios: {
+        baseline: {
+          executor: 'constant-vus',
+          vus: 50,
+          duration: '5m',
+          startTime: '0s',
+        },
+        ramp_to_peak: {
+          executor: 'ramping-vus',
+          startVUs: 50,
+          stages: [
+            { duration: '5m', target: 500  },   // 10× baseline
+            { duration: '10m', target: 2500 },  // 50× baseline
+            { duration: '5m', target: 500  },   // wind down
+          ],
+          startTime: '5m',
+        },
+      },
+      thresholds: {
+        'http_req_duration{scenario:baseline}': ['p(99)<200'],
+        'http_req_duration{scenario:ramp_to_peak}': ['p(95)<1000'],
+        errors: ['rate<0.05'],
+      },
+    };
+
+    const BASE = __ENV.BASE_URL || 'http://api-gateway.cinetrack.svc.cluster.local:8090';
+
+    export default function () {
+      group('catalog', () => {
+        const res = http.get(`${BASE}/api/catalog/movies?page=0&size=20`);
+        errorRate.add(res.status !== 200);
+        catalogLatency.add(res.timings.duration);
+        check(res, { 'catalog 200': (r) => r.status === 200 });
+      });
+
+      group('search', () => {
+        const res = http.get(`${BASE}/api/catalog/movies/search?q=inception`);
+        check(res, { 'search 200': (r) => r.status === 200 });
+      });
+
+      sleep(0.5);
+    }

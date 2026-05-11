@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# Placeholder bring-up script. Replace with the chapter's real cluster
-# bootstrap when the chapter's content is filled in.
-echo "Not yet implemented for this chapter snapshot."
-echo "See README.md for what this chapter is meant to demonstrate."
-exit 1
+echo "NOTE: Multi-cluster requires real clusters. Demonstrating ApplicationSet locally:"
+CLUSTER="cinetrack-ch31"
+if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
+  kind create cluster --name "$CLUSTER"
+fi
+kubectl config use-context "kind-$CLUSTER"
+kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl wait --for=condition=available --timeout=120s deployment/argocd-server -n argocd
+kubectl apply -f manifests/
+echo "✓ Chapter 31: ApplicationSet applied (update cluster-secret URLs for real clusters)"

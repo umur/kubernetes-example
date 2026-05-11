@@ -1,0 +1,16 @@
+# FIXED: circuit breaker + 2s timeout on review-service calls
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-service-config
+  namespace: cinetrack
+  annotations:
+    incident: "02-cascade"
+    state: "after-fix"
+data:
+  application-k8s.properties: |
+    spring.application.name=catalog-service
+    resilience4j.circuitbreaker.instances.reviewService.slidingWindowSize=10
+    resilience4j.circuitbreaker.instances.reviewService.failureRateThreshold=50
+    resilience4j.circuitbreaker.instances.reviewService.waitDurationInOpenState=15s
+    resilience4j.timelimiter.instances.reviewService.timeoutDuration=2s

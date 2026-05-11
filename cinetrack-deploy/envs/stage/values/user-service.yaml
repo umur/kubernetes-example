@@ -1,0 +1,30 @@
+# Values override for user-service in stage
+replicaCount: 2
+
+image:
+  tag: latest   # CI/CD pipeline replaces this with the commit SHA
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+env:
+  JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=75.0 -XX:+UseContainerSupport"
+  SPRING_PROFILES_ACTIVE: "k8s,stage"
+
+extraEnvFrom:
+  - secretRef:
+      name: user-service-credentials   # injected by ESO or pre-created Secret

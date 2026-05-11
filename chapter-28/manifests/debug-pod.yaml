@@ -1,0 +1,25 @@
+# Ephemeral debug container — attach to a running pod without restarting it
+# Usage: kubectl debug -it <pod-name> -n cinetrack --image=nicolaka/netshoot --target=catalog-service
+apiVersion: v1
+kind: Pod
+metadata:
+  name: netshoot-debug
+  namespace: cinetrack
+  labels:
+    app.kubernetes.io/name: debug
+    role: temporary   # remember to delete after debugging
+spec:
+  containers:
+    - name: netshoot
+      image: nicolaka/netshoot
+      command: ["/bin/bash"]
+      stdin: true
+      tty: true
+      resources:
+        requests:
+          memory: 64Mi
+          cpu: 50m
+        limits:
+          memory: 128Mi
+          cpu: 100m
+  restartPolicy: Never

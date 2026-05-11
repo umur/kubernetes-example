@@ -1,0 +1,17 @@
+# Production: generous quota; dev/stage: constrained
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cinetrack-prod-quota
+  namespace: cinetrack
+  labels:
+    env: prod
+    cost-center: product-engineering
+spec:
+  hard:
+    requests.cpu: "16"
+    requests.memory: 32Gi
+    limits.cpu: "32"
+    limits.memory: 64Gi
+    pods: "60"
+    persistentvolumeclaims: "20"

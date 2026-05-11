@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cinetrack-platform
+  labels:
+    team: platform
+    tier: infrastructure
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cinetrack-backend
+  labels:
+    team: backend
+    tier: application
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cinetrack-data
+  labels:
+    team: data
+    tier: storage

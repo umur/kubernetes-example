@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: cinetrack-postgres-daily
+  namespace: cinetrack
+spec:
+  schedule: "0 2 * * *"   # 02:00 UTC daily
+  backupOwnerReference: self
+  cluster:
+    name: cinetrack-postgres

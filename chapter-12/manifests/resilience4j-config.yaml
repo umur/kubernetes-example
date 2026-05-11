@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-resilience-config
+  namespace: cinetrack
+data:
+  application-k8s.properties: |
+    # Circuit breaker: open after 50% failures in 10-call sliding window
+    resilience4j.circuitbreaker.instances.reviewService.slidingWindowSize=10
+    resilience4j.circuitbreaker.instances.reviewService.failureRateThreshold=50
+    resilience4j.circuitbreaker.instances.reviewService.waitDurationInOpenState=10s
+    resilience4j.circuitbreaker.instances.reviewService.permittedNumberOfCallsInHalfOpenState=3
+    # Retry: 3 attempts with exponential backoff
+    resilience4j.retry.instances.reviewService.maxAttempts=3
+    resilience4j.retry.instances.reviewService.waitDuration=200ms
+    resilience4j.retry.instances.reviewService.enableExponentialBackoff=true
+    resilience4j.retry.instances.reviewService.exponentialBackoffMultiplier=2
+    # Timeout: 2 s per call
+    resilience4j.timelimiter.instances.reviewService.timeoutDuration=2s

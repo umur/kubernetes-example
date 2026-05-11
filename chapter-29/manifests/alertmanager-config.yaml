@@ -1,0 +1,34 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: cinetrack-alerts
+  namespace: cinetrack
+spec:
+  route:
+    receiver: cinetrack-slack
+    groupBy: [alertname, service]
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+    routes:
+      - matchers:
+          - name: severity
+            value: critical
+        receiver: cinetrack-pagerduty
+        repeatInterval: 1h
+  receivers:
+    - name: cinetrack-slack
+      slackConfigs:
+        - apiURL:
+            name: slack-webhook
+            key: url
+          channel: "#cinetrack-alerts"
+          title: "{ .GroupLabels.alertname }"
+          text: |
+            *Summary:* { range .Alerts }{ .Annotations.summary }{ end }
+            *Runbook:* { range .Alerts }{ .Annotations.runbook_url }{ end }
+    - name: cinetrack-pagerduty
+      pagerdutyConfigs:
+        - routingKey:
+            name: pagerduty-key
+            key: routing_key

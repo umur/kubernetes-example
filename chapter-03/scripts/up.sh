@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+CLUSTER="cinetrack-ch03"
+if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
+  kind create cluster --name "$CLUSTER" 2>/dev/null || true
+fi
+kubectl config use-context "kind-$CLUSTER"
 
-# Placeholder bring-up script. Replace with the chapter's real cluster
-# bootstrap when the chapter's content is filled in.
-echo "Not yet implemented for this chapter snapshot."
-echo "See README.md for what this chapter is meant to demonstrate."
-exit 1
+kubectl apply -f manifests/
+echo "✓ Chapter 03 manifests applied to kind cluster: $CLUSTER"

@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user-service-prod-us
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: cinetrack
+    env: prod-us
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: cinetrack
+  source:
+    repoURL: https://github.com/umur/kubernetes-example
+    targetRevision: main
+    path: cinetrack-deploy/charts/user-service
+    helm:
+      valueFiles:
+        - ../../envs/prod-us/values/user-service.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cinetrack-prod-us
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

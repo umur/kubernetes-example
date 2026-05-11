@@ -1,0 +1,8 @@
+CinéTrack review-service deployed.
+
+Service URL (within cluster):
+  http://{{ include "review-service.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}
+
+Health check:
+  kubectl port-forward svc/{{ include "review-service.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+  curl http://localhost:{{ .Values.service.port }}/actuator/health

@@ -1,0 +1,8 @@
+CinéTrack api-gateway deployed.
+
+Service URL (within cluster):
+  http://{{ include "api-gateway.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}
+
+Health check:
+  kubectl port-forward svc/{{ include "api-gateway.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+  curl http://localhost:{{ .Values.service.port }}/actuator/health

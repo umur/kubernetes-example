@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# Placeholder bring-up script. Replace with the chapter's real cluster
-# bootstrap when the chapter's content is filled in.
-echo "Not yet implemented for this chapter snapshot."
-echo "See README.md for what this chapter is meant to demonstrate."
-exit 1
+CLUSTER="cinetrack-ch21"
+if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
+  kind create cluster --name "$CLUSTER"
+fi
+kubectl config use-context "kind-$CLUSTER"
+echo "=== Applying Kustomize dev overlay ==="
+kubectl apply -k manifests/kustomize/overlays/dev/
+echo "✓ Chapter 21: Kustomize overlays applied"
+echo "To apply prod: kubectl apply -k manifests/kustomize/overlays/prod/"

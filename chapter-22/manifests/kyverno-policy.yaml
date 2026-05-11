@@ -1,0 +1,24 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-signed-images
+spec:
+  validationFailureAction: Enforce
+  background: false
+  rules:
+    - name: check-image-signature
+      match:
+        any:
+          - resources:
+              kinds: [Pod]
+              namespaces: [cinetrack]
+      verifyImages:
+        - imageReferences:
+            - "ghcr.io/umur/cinetrack-*"
+          attestors:
+            - entries:
+                - keyless:
+                    subject: "https://github.com/umur/kubernetes-example/.github/workflows/release.yml@refs/heads/main"
+                    issuer: "https://token.actions.githubusercontent.com"
+          mutateDigest: true      # replace :tag with @sha256:... for immutability
+          verifyDigest: true

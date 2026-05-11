@@ -1,0 +1,27 @@
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: cinetrack-burst
+spec:
+  template:
+    spec:
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: cinetrack
+      requirements:
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["spot"]         # spot-only for burst cost savings
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values: ["c6i.xlarge", "c6a.xlarge", "c7i.xlarge"]
+      taints:
+        - key: cinetrack/burst
+          value: "true"
+          effect: NoSchedule
+  limits:
+    cpu: "200"
+  disruption:
+    consolidationPolicy: WhenEmpty
+    consolidateAfter: 30s

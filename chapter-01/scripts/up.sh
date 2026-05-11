@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# Placeholder bring-up script. Replace with the chapter's real cluster
-# bootstrap when the chapter's content is filled in.
-echo "Not yet implemented for this chapter snapshot."
-echo "See README.md for what this chapter is meant to demonstrate."
-exit 1
+CLUSTER="cinetrack-ch01"
+if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
+  kind create cluster --name "$CLUSTER" --config manifests/kind-config.yaml
+fi
+kubectl config use-context "kind-$CLUSTER"
+kubectl apply -f manifests/namespace.yaml
+kubectl apply -f manifests/
+echo "✓ Chapter 01: basic cluster + CinéTrack namespace ready"
+kubectl get pods -n cinetrack

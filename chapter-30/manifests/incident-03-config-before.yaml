@@ -1,0 +1,14 @@
+# BROKEN: DB host hardcoded in ConfigMap; rotated credentials not picked up
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-service-config
+  namespace: cinetrack
+  annotations:
+    incident: "03-config-drift"
+    state: "before-fix"
+data:
+  application-k8s.properties: |
+    spring.datasource.url=jdbc:postgresql://postgres-old.cinetrack.svc.cluster.local:5432/cinetrack
+    spring.datasource.username=catalog_user
+    spring.datasource.password=old_password_hardcoded   # credential drift

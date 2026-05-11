@@ -1,0 +1,30 @@
+# Values override for review-service in prod-us
+replicaCount: 3
+
+image:
+  tag: latest   # CI/CD pipeline replaces this with the commit SHA
+
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 500m
+  limits:
+    memory: 1Gi
+    cpu: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 15
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+env:
+  JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=75.0 -XX:+UseContainerSupport"
+  SPRING_PROFILES_ACTIVE: "k8s,prod_us"
+
+extraEnvFrom:
+  - secretRef:
+      name: review-service-credentials   # injected by ESO or pre-created Secret

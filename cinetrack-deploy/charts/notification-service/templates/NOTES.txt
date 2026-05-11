@@ -1,0 +1,8 @@
+CinéTrack notification-service deployed.
+
+Service URL (within cluster):
+  http://{{ include "notification-service.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}
+
+Health check:
+  kubectl port-forward svc/{{ include "notification-service.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+  curl http://localhost:{{ .Values.service.port }}/actuator/health
