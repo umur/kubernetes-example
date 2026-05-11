@@ -8,10 +8,7 @@ kubectl config use-context "kind-$CLUSTER"
 
 # Install nginx ingress controller
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-kubectl wait --namespace ingress-nginx \
-  --for=condition=ready pod \
-  --selector=app.kubernetes.io/component=controller \
-  --timeout=90s
+kubectl rollout status deployment/ingress-nginx-controller -n ingress-nginx --timeout=90s
 
 # Install Gateway API CRDs (v1.1.0 — standard channel)
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.1.0/standard-install.yaml

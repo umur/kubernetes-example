@@ -16,9 +16,9 @@ kubectl wait --for=condition=Established crd/kafkas.kafka.strimzi.io --timeout=1
 kubectl wait --for=condition=Established crd/kafkatopics.kafka.strimzi.io --timeout=60s
 kubectl wait --for=condition=Established crd/kafkausers.kafka.strimzi.io --timeout=60s
 
-# Wait for API group to appear in server-side discovery (cache refresh delay)
-echo "Waiting for kafka.strimzi.io API group to be discoverable..."
-until kubectl api-resources --api-group=kafka.strimzi.io 2>/dev/null | grep -q Kafka; do
+# Wait for Kafka REST mapping to be fully registered (discovery lag after CRD Established)
+echo "Waiting for Kafka REST mapping to be ready..."
+until kubectl get kafka --all-namespaces &>/dev/null; do
   sleep 3
 done
 

@@ -10,5 +10,5 @@ kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/downloa
 kubectl wait --for=condition=Established crd/httproutes.gateway.networking.k8s.io --timeout=60s
 
 kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
-kubectl apply -f manifests/
+kubectl apply --validate=false -f manifests/
 echo "✓ Chapter 11: Ingress + HTTPRoute resilience manifests applied"
