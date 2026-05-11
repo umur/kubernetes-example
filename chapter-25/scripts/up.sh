@@ -16,12 +16,11 @@ kubectl wait --for=condition=Established crd/kafkas.kafka.strimzi.io --timeout=1
 kubectl wait --for=condition=Established crd/kafkatopics.kafka.strimzi.io --timeout=60s
 kubectl wait --for=condition=Established crd/kafkausers.kafka.strimzi.io --timeout=60s
 
-# Wait for Kafka REST mapping to be fully registered (discovery lag after CRD Established)
+# Retry apply until Kafka REST mapping is fully registered in API server
 echo "Waiting for Kafka REST mapping to be ready..."
-until kubectl get kafka --all-namespaces &>/dev/null; do
-  sleep 3
+until kubectl apply -f manifests/ 2>/dev/null; do
+  echo "  REST mapping not ready, retrying in 5s..."
+  sleep 5
 done
-
-kubectl apply -f manifests/
 echo "✓ Chapter 25: Strimzi Kafka cluster + topics applied"
 echo "Watch: kubectl get kafka cinetrack-kafka -n cinetrack --watch"
