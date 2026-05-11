@@ -20,5 +20,7 @@ spec:
                 - keyless:
                     subject: "https://github.com/umur/kubernetes-example/.github/workflows/release.yml@refs/heads/main"
                     issuer: "https://token.actions.githubusercontent.com"
-          mutateDigest: true      # replace :tag with @sha256:... for immutability
+                    rekor:
+                      url: https://rekor.sigstore.dev
+          mutateDigest: true
           verifyDigest: true

@@ -13,9 +13,8 @@ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/component=controller \
   --timeout=90s
 
-# Install Gateway API CRDs (specific version for reproducibility)
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
-# Wait for Gateway API CRDs to be established before applying resources
+# Install Gateway API CRDs (v1.1.0 — standard channel)
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.1.0/standard-install.yaml
 kubectl wait --for=condition=Established crd/gateways.gateway.networking.k8s.io --timeout=60s
 kubectl wait --for=condition=Established crd/httproutes.gateway.networking.k8s.io --timeout=60s
 

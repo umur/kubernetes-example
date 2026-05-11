@@ -3,7 +3,7 @@ kind: ClusterPolicy
 metadata:
   name: require-sbom-attestation
 spec:
-  validationFailureAction: Audit     # start in audit before enforcing
+  validationFailureAction: Audit
   rules:
     - name: check-sbom
       match:
@@ -14,6 +14,7 @@ spec:
       verifyImages:
         - imageReferences:
             - "ghcr.io/umur/cinetrack-*"
+          mutateDigest: false   # must be false when failureAction is Audit
           attestations:
             - predicateType: https://spdx.dev/Document
               attestors:
@@ -21,3 +22,5 @@ spec:
                     - keyless:
                         subject: "https://github.com/umur/kubernetes-example/.github/workflows/release.yml@refs/heads/main"
                         issuer: "https://token.actions.githubusercontent.com"
+                        rekor:
+                          url: https://rekor.sigstore.dev

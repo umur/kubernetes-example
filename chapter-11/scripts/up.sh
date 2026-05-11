@@ -6,8 +6,7 @@ if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
 fi
 kubectl config use-context "kind-$CLUSTER"
 
-# Install Gateway API CRDs (HTTPRoute is a Gateway API resource)
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.1.0/standard-install.yaml
 kubectl wait --for=condition=Established crd/httproutes.gateway.networking.k8s.io --timeout=60s
 
 kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -

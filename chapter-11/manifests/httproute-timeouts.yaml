@@ -14,10 +14,9 @@ spec:
       timeouts:
         request: 5s
         backendRequest: 3s
-      retry:
-        codes: [503, 504]
-        attempts: 3
-        backoff: 250ms
+      # Note: HTTPRoute retry policy is configured via vendor-specific annotations
+      # on the parent Gateway or via a RetryFilter (experimental channel only).
+      # For production retries use Nginx Ingress annotations or a service mesh.
       backendRefs:
         - name: catalog-service
           port: 8080
