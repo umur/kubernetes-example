@@ -15,6 +15,7 @@ kubectl apply -f "https://strimzi.io/install/latest?namespace=cinetrack" -n cine
 kubectl wait --for=condition=Established crd/kafkas.kafka.strimzi.io --timeout=120s
 kubectl wait --for=condition=Established crd/kafkatopics.kafka.strimzi.io --timeout=60s
 kubectl wait --for=condition=Established crd/kafkausers.kafka.strimzi.io --timeout=60s
+kubectl wait --for=condition=Established crd/kafkanodepools.kafka.strimzi.io --timeout=60s
 
 # Retry apply until Kafka REST mapping is fully registered in API server
 echo "Waiting for Kafka REST mapping to be ready..."
