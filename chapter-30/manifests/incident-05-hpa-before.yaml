@@ -21,4 +21,4 @@ spec:
         target:
           type: Utilization
           averageUtilization: 60
-  # No behavior block → default 5-min stabilization window but scale-down is instant
+          # No behavior block: default stabilization window, scale-down is instant
