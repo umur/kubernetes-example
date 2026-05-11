@@ -10,5 +10,6 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 # Patch metrics-server for kind (disable TLS verification)
 kubectl patch deployment metrics-server -n kube-system --type='json' \
   -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
+kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -f manifests/
 echo "✓ Chapter 14: HPA + KEDA ScaledObject applied"

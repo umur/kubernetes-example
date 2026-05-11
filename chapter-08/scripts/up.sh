@@ -6,5 +6,6 @@ if ! kind get clusters 2>/dev/null | grep -q "^$CLUSTER$"; then
 fi
 kubectl config use-context "kind-$CLUSTER"
 
+kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -f manifests/
 echo "✓ Chapter 08 manifests applied to kind cluster: $CLUSTER"

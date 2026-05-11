@@ -9,5 +9,6 @@ kubectl config use-context "kind-$CLUSTER"
 if ! kubectl get crd verticalpodautoscalers.autoscaling.k8s.io &>/dev/null; then
   kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/vertical-pod-autoscaler/deploy/vpa-v1-crd-gen.yaml
 fi
+kubectl create namespace cinetrack --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -f manifests/
 echo "✓ Chapter 16: VPA + PDB + PriorityClass applied"
